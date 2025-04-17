@@ -84,11 +84,11 @@ async def init_db(db: AsyncSession) -> None:
     for pet_data in INITIAL_PETS:
         # Проверяем, существует ли уже питомец с таким именем и породой
         existing_pet = await crud.pet.get_by_unique_attributes(
-    db, 
-    name=pet_data["name"],
-    type=pet_data["type"],
-    breed=pet_data["breed"]
-)
+            db, 
+            name=pet_data["name"],
+            type=pet_data["type"],
+            breed=pet_data["breed"]
+        )
         if not existing_pet:
             pet_in = schemas.PetCreate(**pet_data)
             await crud.pet.create(db, obj_in=pet_in)
